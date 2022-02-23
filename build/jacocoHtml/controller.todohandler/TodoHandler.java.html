@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TodoHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HW9</a> &gt; <a href="index.source.html" class="el_package">controller.todohandler</a> &gt; <span class="el_source">TodoHandler.java</span></div><h1>TodoHandler.java</h1><pre class="source lang-java linenums">package controller.todohandler;
+
+import commands.AbstractCmd;
+import commands.Complete;
+import commands.add.Add;
+import commands.display.Display;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.NoSuchElementException;
+import model.todo.Todo;
+import model.todo.Todo.Builder;
+import model.updater.IUpdater;
+import model.updater.Updater;
+import utilities.ErrorLogger;
+import utilities.FileIO;
+import utilities.IdGenerator;
+
+/**
+ * Represents a TodoHandler which is the Controller of this System
+ */
+public class TodoHandler implements ITodoHandler {
+  private List&lt;Todo&gt; todoList;
+  private final String csvPath;
+
+  public List&lt;Todo&gt; getTodoList() {
+<span class="nc" id="L30">    return this.todoList;</span>
+  }
+
+  public String getCsvPath() {
+<span class="nc" id="L34">    return csvPath;</span>
+  }
+
+  private final IUpdater updater;
+
+  /**
+   * Instantiates a new To-do handler.
+   *
+   * @param csvPath the csv path for output
+   */
+<span class="fc" id="L44">  public TodoHandler(String csvPath) {</span>
+<span class="fc" id="L45">    this.csvPath = csvPath;</span>
+<span class="fc" id="L46">    this.updater = new Updater();</span>
+<span class="fc" id="L47">  }</span>
+
+
+  /**
+   * Reads a csv to a list of todos.
+   */
+  private void readCSVToListOfTodos(){
+<span class="fc" id="L54">    String csvPath = this.csvPath;</span>
+<span class="fc" id="L55">    String csvData = FileIO.readFile(csvPath);</span>
+<span class="fc" id="L56">    this.todoList = this.makeListOfTodos(csvData);</span>
+<span class="fc" id="L57">  }</span>
+
+  /**
+   * Create a list of todos list.
+   *
+   * @param csvBlobData the csv blob data
+   * @return the list
+   */
+  public List&lt;Todo&gt; makeListOfTodos(String csvBlobData){
+    List&lt;Todo&gt; listOfTodos;
+<span class="fc" id="L67">    IdGenerator.resetIDGenerator();</span>
+<span class="fc" id="L68">    String[] resultArr = csvBlobData.split(&quot;\r?\n&quot;);</span>
+<span class="fc" id="L69">    List&lt;List&lt;String&gt;&gt; todosList = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L70" title="All 2 branches covered.">    for(int i = 1; i &lt; resultArr.length; i++){</span>
+<span class="fc" id="L71">      resultArr[i] = resultArr[i].replaceAll(&quot;^\&quot;|\&quot;$&quot;, &quot;&quot;);</span>
+<span class="fc" id="L72">      todosList.add(Arrays.asList(resultArr[i].split(&quot;\&quot;,\&quot;&quot;)));</span>
+    }
+<span class="fc" id="L74">    listOfTodos = createListOfTodos(todosList);</span>
+<span class="fc" id="L75">    return listOfTodos;</span>
+  }
+
+  /**
+   * Constructs a To-do
+   *
+   * @param todoData A List containing the data for a To-do
+   * @return A To-do with the given specifications.
+   */
+  private Todo makeTodoFromData(List&lt;String&gt; todoData){
+<span class="fc" id="L85">    String text = todoData.get(1);</span>
+<span class="fc" id="L86">    boolean completed = Boolean.parseBoolean(todoData.get(2));</span>
+<span class="fc" id="L87">    String formatterTemp = todoData.get(3);</span>
+<span class="fc" id="L88">    String priorityTemp = todoData.get(4);</span>
+<span class="fc" id="L89">    String category = todoData.get(5);</span>
+<span class="fc" id="L90">    Builder todoBuilder = new Builder(text);</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">    if (!formatterTemp.equals(&quot;?&quot;)) {</span>
+<span class="fc" id="L92">      DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;M/d/uuuu&quot;);</span>
+<span class="fc" id="L93">      LocalDate dueDate = LocalDate.parse(formatterTemp, formatter);</span>
+<span class="fc" id="L94">      todoBuilder.addDueDate(dueDate);</span>
+    }
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">    if (!priorityTemp.equals(&quot;?&quot;)) {</span>
+<span class="fc" id="L97">      int priority = Integer.parseInt(priorityTemp);</span>
+<span class="fc" id="L98">      todoBuilder.addPriority(priority);</span>
+    }
+<span class="fc bfc" id="L100" title="All 2 branches covered.">    if(completed){</span>
+<span class="fc" id="L101">      todoBuilder.addCompleted(true);</span>
+    }
+<span class="fc bfc" id="L103" title="All 2 branches covered.">    if(!category.equals(&quot;?&quot;)){</span>
+<span class="fc" id="L104">      todoBuilder.addCategory(category);</span>
+    }
+<span class="fc" id="L106">    return todoBuilder.build();</span>
+  }
+
+  /**
+   * Creates a list of To-dos
+   *
+   * @param todosList A List containing lists of Strings with data for To-dos
+   * @return A List of To-do objects
+   */
+  private List&lt;Todo&gt; createListOfTodos(List&lt;List&lt;String&gt;&gt; todosList) {
+<span class="fc" id="L116">    List&lt;Todo&gt; listOfTodos = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L117" title="All 2 branches covered.">    for (List&lt;String&gt; data : todosList) {</span>
+<span class="fc" id="L118">      listOfTodos.add(this.makeTodoFromData(data));</span>
+<span class="fc" id="L119">    }</span>
+<span class="fc" id="L120">    return listOfTodos;</span>
+  }
+
+  /**
+   * Adds a To-do to this system.
+   *
+   * @param todo The todo to add
+   */
+  private void addTodo(Todo todo) {
+<span class="fc" id="L129">    Todo maxID = this.todoList.stream()</span>
+<span class="fc" id="L130">        .max(Comparator.comparing(Todo::getID))</span>
+<span class="fc" id="L131">        .orElseThrow(NoSuchElementException::new);</span>
+<span class="fc" id="L132">    todo = todo.setID(maxID.getID() + 1);</span>
+<span class="fc" id="L133">    this.todoList.add(todo);</span>
+<span class="fc" id="L134">  }</span>
+
+  /**
+   * Sets the To-do of the provided ID to complete
+   *
+   * @param id the ID of the To-do to complete
+   */
+  private void completeTodo(int id) {
+<span class="nc bnc" id="L142" title="All 2 branches missed.">    for (Todo todo : this.todoList) {</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">      if (todo.getID() == id) {</span>
+<span class="nc" id="L144">        todo.setCompleted(true);</span>
+<span class="nc" id="L145">        break;</span>
+      }
+<span class="nc" id="L147">    }</span>
+<span class="nc" id="L148">    ErrorLogger.add(&quot;ID not found, please make sure the ID exists&quot;);</span>
+<span class="nc" id="L149">    ErrorLogger.printLog();</span>
+<span class="nc" id="L150">  }</span>
+
+  /**
+   * Prints a list of To-dos
+   *
+   * @param todoList The To-do list to print
+   */
+  private void printTodos(List&lt;Todo&gt; todoList) {
+<span class="fc" id="L158">    printBorder();</span>
+<span class="fc" id="L159">    String format = &quot;%1$-5s%2$-40s%3$-10s%4$-12s%5$-10s%6$-10s\n&quot;;</span>
+<span class="fc" id="L160">    System.out.format(format, &quot;ID&quot;, &quot;Text&quot;, &quot;Completed&quot;, &quot;Due Date&quot;,</span>
+        &quot;Priority&quot;, &quot;Category&quot;);
+<span class="pc bpc" id="L162" title="1 of 2 branches missed.">    if (todoList.isEmpty()) {</span>
+<span class="nc" id="L163">      ErrorLogger.add(&quot;No results found, adjust your display arguments&quot;);</span>
+<span class="nc" id="L164">      ErrorLogger.printLog();</span>
+    } else {
+<span class="fc bfc" id="L166" title="All 2 branches covered.">      for (Todo currTodo : todoList) {</span>
+<span class="fc" id="L167">        System.out.format(format, currTodo.getID(), currTodo.getText(),</span>
+<span class="fc" id="L168">            currTodo.isCompleted(), currTodo.getDueDate(),</span>
+<span class="fc" id="L169">            currTodo.getPriority(), currTodo.getCategory());</span>
+<span class="fc" id="L170">    }</span>
+    }
+<span class="fc" id="L172">    printBorder();</span>
+<span class="fc" id="L173">  }</span>
+
+  /**
+   * Prints a line of *
+   */
+  private void printBorder() {
+<span class="fc" id="L179">    int lineSize = 85;</span>
+<span class="fc bfc" id="L180" title="All 2 branches covered.">    for (int i = 0; i &lt; lineSize; i++) {</span>
+<span class="fc" id="L181">      System.out.print(&quot;*&quot;);</span>
+    }
+<span class="fc" id="L183">    System.out.println();</span>
+<span class="fc" id="L184">  }</span>
+
+  /**
+   * Processes the Display command
+   *
+   * @param display The Display object
+   */
+  private void display(Display display) {
+<span class="fc" id="L192">    List&lt;Todo&gt; todoListCopy = this.todoList;</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">    for (Display cmd : display.getDisplayProperties()) {</span>
+<span class="fc" id="L194">      todoListCopy = cmd.applyDisplayProperty(todoListCopy);</span>
+<span class="fc" id="L195">    }</span>
+<span class="fc" id="L196">    this.printTodos(todoListCopy);</span>
+<span class="fc" id="L197">  }</span>
+
+  /**
+   * Sends each command for execution based on its type
+   *
+   * @param cmd The given command to execute
+   */
+  private void TodoFactory (AbstractCmd cmd) {
+<span class="fc bfc" id="L205" title="All 2 branches covered.">    if (cmd instanceof Add) {</span>
+<span class="fc" id="L206">      Add newAdd = (Add) cmd; // Steven added</span>
+<span class="fc" id="L207">      addTodo(newAdd.getNewTodo());</span>
+<span class="fc" id="L208">    }</span>
+<span class="pc bpc" id="L209" title="1 of 2 branches missed.">    else if (cmd instanceof Complete) {</span>
+<span class="nc" id="L210">      Complete newComplete = (Complete) cmd; // Steven added</span>
+<span class="nc" id="L211">      completeTodo(newComplete.getId());</span>
+<span class="nc" id="L212">    }</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">    else if (cmd instanceof Display) { // display</span>
+<span class="fc" id="L214">      Display newDisplay = (Display) cmd;</span>
+<span class="fc" id="L215">      display(newDisplay);</span>
+    }
+<span class="fc" id="L217">  }</span>
+
+  /**
+   * Executes each command in the command list.
+   *
+   * @param commandList The list of Commands.
+   */
+  @Override
+  public void takeAction(List&lt;AbstractCmd&gt; commandList) {
+<span class="fc" id="L226">    readCSVToListOfTodos();</span>
+<span class="fc bfc" id="L227" title="All 2 branches covered.">    for (AbstractCmd command : commandList) {</span>
+<span class="fc" id="L228">      this.TodoFactory(command);</span>
+<span class="fc" id="L229">    }</span>
+<span class="fc" id="L230">    this.updater.updateCSV(this.todoList, this.csvPath);</span>
+<span class="fc" id="L231">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

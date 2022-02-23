@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ErrorLogger.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HW9</a> &gt; <a href="index.source.html" class="el_package">utilities</a> &gt; <span class="el_source">ErrorLogger.java</span></div><h1>ErrorLogger.java</h1><pre class="source lang-java linenums">package utilities;
+
+import static utilities.Constants.RED;
+import static utilities.Constants.RESET;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * The type Error logger, which will track all errors that occur.
+ */
+public class ErrorLogger {
+
+
+  public static List&lt;String&gt; log;
+
+  /**
+   * Instantiates a new Error logger.
+   */
+  private ErrorLogger() {
+  }
+
+  /**
+   * Create a new Error Logger List
+   */
+  public static void create() {
+<span class="fc" id="L27">    log = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L28">  }</span>
+
+
+  /**
+   * Adds an error to the ErrorLogger.
+   *
+   * @param event A string description of the event.
+   */
+  public static void add(String event) {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">    if (!log.contains(event)) {</span>
+<span class="nc" id="L38">      log.add(event);</span>
+    }
+<span class="nc" id="L40">  }</span>
+
+  /**
+   * Checks whether this ErrorLogger is empty.
+   *
+   * @return true if this ErrorLogger is empty, false otherwise.
+   */
+  public static boolean isEmpty() {
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">    return log.size() == 0;</span>
+  }
+
+  /**
+   * Returns the number of elements/errors in the logger
+   *
+   * @return the number of elements/errors in the logger
+   */
+  public static int getSize() {
+<span class="nc" id="L57">    return log.size();</span>
+  }
+
+
+  /**
+   * Prints all the errors in the log
+   */
+  public static void printLog() {
+<span class="nc" id="L65">    System.out.print(RED);</span>
+<span class="nc" id="L66">    System.out.println(&quot;ERROR LOG:&quot;);</span>
+<span class="nc" id="L67">    log.forEach(System.out::println);</span>
+<span class="nc" id="L68">    System.out.print(RESET);</span>
+<span class="nc" id="L69">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

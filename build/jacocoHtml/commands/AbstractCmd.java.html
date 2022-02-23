@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AbstractCmd.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HW9</a> &gt; <a href="index.source.html" class="el_package">commands</a> &gt; <span class="el_source">AbstractCmd.java</span></div><h1>AbstractCmd.java</h1><pre class="source lang-java linenums">package commands;
+
+import java.util.List;
+import java.util.Objects;
+import utilities.ErrorLogger;
+
+/**
+ * The type Abstract cmd.
+ */
+public abstract class AbstractCmd {
+
+  protected String name;
+  protected String command;
+  protected String argument;
+
+
+  /**
+   * Instantiates a new Abstract cmd.
+   *
+   * @param name    the name
+   * @param command the command
+   */
+<span class="fc" id="L23">  public AbstractCmd(String name, String command) {</span>
+<span class="fc" id="L24">    this.name = name;</span>
+<span class="fc" id="L25">    this.command = command;</span>
+<span class="fc" id="L26">  }</span>
+
+  /**
+   * Find argument for specified command
+   *
+   * @param cmdList the cmd list
+   * @return True if the argument for the command is found, otherwise false
+   * @throws IndexOutOfBoundsException the index out of bounds exception
+   */
+  public boolean findArgument(List&lt;String&gt; cmdList) throws IndexOutOfBoundsException {
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">    if (cmdList.contains(this.command)) {</span>
+      try {
+<span class="fc" id="L38">        int argIndex = cmdList.indexOf(this.command) + 1;</span>
+<span class="fc" id="L39">        this.argument = cmdList.get(argIndex);</span>
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        if (this.isValidArgument()) {</span>
+<span class="fc" id="L41">          return true;</span>
+        }
+<span class="nc" id="L43">      } catch (IndexOutOfBoundsException indexOutOfBoundsException) {</span>
+<span class="nc" id="L44">        ErrorLogger.add(this.name + &quot; argument not provided&quot;);</span>
+<span class="nc" id="L45">      }</span>
+    }
+<span class="nc" id="L47">    return false;</span>
+  }
+
+  /**
+   * Checks to see if the found argument is valid
+   *
+   * @return True if the argument does not start like a command, false if it does
+   */
+  public boolean isValidArgument() {
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">    if (this.argument.startsWith(&quot;--&quot;)) {</span>
+<span class="nc" id="L57">      ErrorLogger.add(this.name + &quot; argument not provided&quot;);</span>
+<span class="nc" id="L58">      return false;</span>
+<span class="fc" id="L59">    } else return true;</span>
+  }
+
+  /**
+   * Gets name.
+   *
+   * @return the name
+   */
+  public String getName() {
+<span class="fc" id="L68">    return this.name;</span>
+  }
+
+  /**
+   * Gets command.
+   *
+   * @return the command
+   */
+  public String getCommand() {
+<span class="fc" id="L77">    return this.command;</span>
+  }
+
+  /**
+   * Gets argument.
+   *
+   * @return the argument
+   */
+  public String getArgument() {
+<span class="fc" id="L86">    return this.argument;</span>
+  }
+
+  /**
+   * Compares to objects for equality
+   *
+   * @param o the other object to compare to
+   * @return true if equal, otherwise false
+   */
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L97" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L98">      return true;</span>
+    }
+<span class="nc bnc" id="L100" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L101">      return false;</span>
+    }
+<span class="nc" id="L103">    AbstractCmd that = (AbstractCmd) o;</span>
+<span class="nc bnc" id="L104" title="All 4 branches missed.">    return Objects.equals(this.name, that.name) &amp;&amp; Objects.equals(this.argument, that.argument);</span>
+  }
+
+  /**
+   * returns the hashcode for an object
+   *
+   * @return the hashcode
+   */
+  @Override
+  public int hashCode() {
+<span class="nc" id="L114">    return Objects.hash(name, argument);</span>
+  }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

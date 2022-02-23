@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DateSort.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HW9</a> &gt; <a href="index.source.html" class="el_package">commands.display</a> &gt; <span class="el_source">DateSort.java</span></div><h1>DateSort.java</h1><pre class="source lang-java linenums">package commands.display;
+
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import model.todo.Todo;
+import utilities.Constants;
+
+/**
+ * The type Date sort.
+ */
+public class DateSort extends Display {
+
+  /**
+   * Instantiates a new Date sort.
+   */
+  public DateSort() {
+<span class="nc" id="L19">    super(Constants.DATE_SORT_NAME, Constants.DATE_SORT);</span>
+<span class="nc" id="L20">  }</span>
+
+  /**
+   * Applies a specific filter or sort on a list of todos
+   *
+   * @param todoList the todo list
+   * @return the list with the display property applied
+   */
+  @Override
+  public List&lt;Todo&gt; applyDisplayProperty(List&lt;Todo&gt; todoList) {
+<span class="nc" id="L30">    List&lt;Todo&gt; newList = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L31">    List&lt;Todo&gt; nullDatesList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">    for (Todo todo : todoList) {</span>
+<span class="nc bnc" id="L33" title="All 2 branches missed.">      if (todo.getDueDate() != null) {</span>
+<span class="nc" id="L34">        newList.add(todo);</span>
+      } else {
+<span class="nc" id="L36">        nullDatesList.add(todo);</span>
+      }
+<span class="nc" id="L38">    }</span>
+<span class="nc" id="L39">    newList.sort(Comparator.comparing(Todo::getDueDate));</span>
+<span class="nc" id="L40">    newList.addAll(nullDatesList);</span>
+
+<span class="nc" id="L42">    return newList;</span>
+  }
+
+  /**
+   * @return String representation of this object
+   */
+  @Override
+  public String toString() {
+<span class="nc" id="L50">    return &quot;DateSort{&quot; +</span>
+        &quot;displayStatus=&quot; + displayStatus +
+        '}';
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

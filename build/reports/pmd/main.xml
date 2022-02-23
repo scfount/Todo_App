@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.26.0" timestamp="2022-01-25T11:52:29.402">
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/main/java/commands/add/Add.java">
+<violation beginline="94" endline="94" begincolumn="43" endcolumn="53" rule="AvoidReassigningParameters" ruleset="Best Practices" package="commands.add" class="Add" method="appendBuilder" variable="todoBuilder" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#avoidreassigningparameters" priority="2">
+Avoid reassigning parameters such as 'todoBuilder'
+</violation>
+</file>
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/main/java/commands/display/DisplayFactory.java">
+<violation beginline="10" endline="10" begincolumn="21" endcolumn="28" rule="FieldNamingConventions" ruleset="Code Style" package="commands.display" class="DisplayFactory" variable="MAX_SORT" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#fieldnamingconventions" priority="1">
+The final field name 'MAX_SORT' doesn't match '[a-z][a-zA-Z0-9]*'
+</violation>
+</file>
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/main/java/controller/parser/Parser.java">
+<violation beginline="90" endline="90" begincolumn="7" endcolumn="24" rule="SystemPrintln" ruleset="Best Practices" package="controller.parser" class="Parser" method="processCmds" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+</file>
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/main/java/controller/todohandler/TodoHandler.java">
+<violation beginline="128" endline="128" begincolumn="29" endcolumn="32" rule="AvoidReassigningParameters" ruleset="Best Practices" package="controller.todohandler" class="TodoHandler" method="addTodo" variable="todo" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#avoidreassigningparameters" priority="2">
+Avoid reassigning parameters such as 'todo'
+</violation>
+<violation beginline="181" endline="181" begincolumn="7" endcolumn="22" rule="SystemPrintln" ruleset="Best Practices" package="controller.todohandler" class="TodoHandler" method="printBorder" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.print is used
+</violation>
+<violation beginline="183" endline="183" begincolumn="5" endcolumn="22" rule="SystemPrintln" ruleset="Best Practices" package="controller.todohandler" class="TodoHandler" method="printBorder" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+<violation beginline="204" endline="217" begincolumn="11" endcolumn="3" rule="MethodNamingConventions" ruleset="Code Style" package="controller.todohandler" class="TodoHandler" method="TodoFactory" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#methodnamingconventions" priority="1">
+The instance method name 'TodoFactory' doesn't match '[a-z][a-zA-Z0-9]*'
+</violation>
+</file>
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/main/java/model/todo/Todo.java">
+<violation beginline="11" endline="11" begincolumn="15" endcolumn="16" rule="FieldNamingConventions" ruleset="Code Style" package="model.todo" class="Todo" variable="ID" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#fieldnamingconventions" priority="1">
+The field name 'ID' doesn't match '[a-z][a-zA-Z0-9]*'
+</violation>
+<violation beginline="11" endline="11" begincolumn="15" endcolumn="16" rule="VariableNamingConventions" ruleset="Code Style" package="model.todo" class="Todo" variable="ID" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#variablenamingconventions" priority="1">
+Variables should start with a lowercase character, 'ID' starts with uppercase character.
+</violation>
+<violation beginline="56" endline="56" begincolumn="25" endcolumn="26" rule="FormalParameterNamingConventions" ruleset="Code Style" package="model.todo" class="Todo" method="setID" variable="ID" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#formalparameternamingconventions" priority="1">
+The method parameter name 'ID' doesn't match '[a-z][a-zA-Z0-9]*'
+</violation>
+<violation beginline="56" endline="56" begincolumn="25" endcolumn="26" rule="VariableNamingConventions" ruleset="Code Style" package="model.todo" class="Todo" method="setID" variable="ID" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#variablenamingconventions" priority="1">
+Variables should start with a lowercase character, 'ID' starts with uppercase character.
+</violation>
+</file>
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/main/java/model/updater/Updater.java">
+<violation beginline="53" endline="53" begincolumn="12" endcolumn="13" rule="LocalVariableNamingConventions" ruleset="Code Style" package="model.updater" class="Updater" method="formatTodoData" variable="ID" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#localvariablenamingconventions" priority="1">
+The local variable name 'ID' doesn't match '[a-z][a-zA-Z0-9]*'
+</violation>
+<violation beginline="53" endline="53" begincolumn="12" endcolumn="13" rule="VariableNamingConventions" ruleset="Code Style" package="model.updater" class="Updater" method="formatTodoData" variable="ID" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#variablenamingconventions" priority="1">
+Variables should start with a lowercase character, 'ID' starts with uppercase character.
+</violation>
+</file>
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/main/java/utilities/Constants.java">
+<violation beginline="4" endline="50" begincolumn="8" endcolumn="1" rule="ClassNamingConventions" ruleset="Code Style" package="utilities" class="Constants" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#classnamingconventions" priority="1">
+The utility class name 'Constants' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper|Constants)'
+</violation>
+</file>
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/main/java/utilities/ErrorLogger.java">
+<violation beginline="12" endline="70" begincolumn="8" endcolumn="1" rule="ClassNamingConventions" ruleset="Code Style" package="utilities" class="ErrorLogger" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#classnamingconventions" priority="1">
+The utility class name 'ErrorLogger' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper|Constants)'
+</violation>
+<violation beginline="65" endline="65" begincolumn="5" endcolumn="20" rule="SystemPrintln" ruleset="Best Practices" package="utilities" class="ErrorLogger" method="printLog" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.print is used
+</violation>
+<violation beginline="66" endline="66" begincolumn="5" endcolumn="22" rule="SystemPrintln" ruleset="Best Practices" package="utilities" class="ErrorLogger" method="printLog" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+<violation beginline="68" endline="68" begincolumn="5" endcolumn="20" rule="SystemPrintln" ruleset="Best Practices" package="utilities" class="ErrorLogger" method="printLog" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.print is used
+</violation>
+</file>
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/main/java/utilities/FileIO.java">
+<violation beginline="16" endline="112" begincolumn="8" endcolumn="1" rule="ClassNamingConventions" ruleset="Code Style" package="utilities" class="FileIO" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#classnamingconventions" priority="1">
+The utility class name 'FileIO' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper|Constants)'
+</violation>
+</file>
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/main/java/utilities/IdGenerator.java">
+<violation beginline="3" endline="25" begincolumn="8" endcolumn="1" rule="ClassNamingConventions" ruleset="Code Style" package="utilities" class="IdGenerator" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_codestyle.html#classnamingconventions" priority="1">
+The utility class name 'IdGenerator' doesn't match '[A-Z][a-zA-Z0-9]+(Utils?|Helper|Constants)'
+</violation>
+</file>
+</pmd>

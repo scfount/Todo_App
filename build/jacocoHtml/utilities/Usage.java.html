@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Usage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HW9</a> &gt; <a href="index.source.html" class="el_package">utilities</a> &gt; <span class="el_source">Usage.java</span></div><h1>Usage.java</h1><pre class="source lang-java linenums">package utilities;
+
+
+import static utilities.Constants.BLUE;
+import static utilities.Constants.CYAN;
+import static utilities.Constants.GREEN;
+import static utilities.Constants.MAGENTA;
+import static utilities.Constants.RESET;
+
+public class Usage {
+
+
+<span class="nc" id="L13">  private String usage = MAGENTA + &quot;\n\n*** Commands to Add, Complete, and Display Todos ***\n&quot; + RESET</span>
+      + GREEN + &quot;--csv-file &lt;path/to/file&gt;:\t&quot; + RESET + &quot;The CSV file containing the todos. This option is required.\n&quot;
+      + GREEN + &quot;--complete-todo &lt;id&gt;:\t&quot; + RESET + &quot;Mark the Todo with the provided ID as complete.\n\n&quot;
+      + CYAN + &quot;--add-todo:\t&quot; + RESET + &quot;Add a new todo. If this option is provided, then --todo-text must also be provided.\n&quot;
+      + CYAN + &quot;--todo-text &lt;description of todo&gt;:\t&quot; + RESET + &quot;A description of the todo.\n&quot;
+      + CYAN + &quot;--completed:\t&quot; + RESET + &quot;(Optional) Sets the completed status of a new todo to true.\n&quot;
+      + CYAN + &quot;--due &lt;due date&gt;:\t&quot; + RESET + &quot;(Optional) Sets the due date of a new todo. You may choose how the date should be formatted.\n&quot;
+      + CYAN + &quot;--priority &lt;1, 2, or 3&gt;:\t&quot; + RESET + &quot;(Optional) Sets the priority of a new todo. The value can be 1, 2, or 3.\n&quot;
+      + CYAN + &quot;--category &lt;a category name&gt;:\t&quot; + RESET + &quot;(Optional) Sets the category of a new todo. The value can be any String. Categories do not need to be pre-defined.\n\n&quot;
+      + BLUE + &quot;--display:\t&quot; + RESET + &quot;Display todos. If none of the following optional arguments are provided, displays all todos.\n&quot;
+      + MAGENTA + &quot;*** Optional Display Arguments ***\n&quot; + RESET
+      + BLUE + &quot;--show-incomplete:\t&quot; + RESET + &quot;(Optional) If --display is provided, only incomplete todos should be displayed.\n&quot;
+      + BLUE + &quot;--show-category &lt;category&gt;:\t&quot; + RESET + &quot;(Optional) If --display is provided, only todos with the given category should be displayed.\n&quot;
+      + BLUE + &quot;--sort-by-date:\t&quot; + RESET + &quot;(Optional) If --display is provided, sort the list of todos by date order (ascending). Cannot be combined with --sort-by-priority.\n&quot;
+      + BLUE + &quot;--sort-by-priority:\t&quot; + RESET + &quot;(Optional) If --display is provided, sort the list of todos by priority (ascending). Cannot be combined with --sort-by-date.\n&quot;;
+
+<span class="nc" id="L29">  public Usage() {</span>
+<span class="nc" id="L30">  }</span>
+
+  @Override
+  public String toString() {
+<span class="nc" id="L34">    return this.usage;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

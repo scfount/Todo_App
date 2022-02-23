@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Parser.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HW9</a> &gt; <a href="index.source.html" class="el_package">controller.parser</a> &gt; <span class="el_source">Parser.java</span></div><h1>Parser.java</h1><pre class="source lang-java linenums">package controller.parser;
+
+import commands.AbstractCmd;
+import commands.CSVFile;
+import commands.CmdFactory;
+import controller.todohandler.ITodoHandler;
+import controller.todohandler.TodoHandler;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
+import utilities.ErrorLogger;
+import utilities.Usage;
+
+/**
+ * Represents an Argument Parser
+ */
+public class Parser {
+
+  private List&lt;String&gt; cmdList;
+<span class="fc" id="L23">  private List&lt;AbstractCmd&gt; cmdObjList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L24">  private CmdFactory cmdFactory = new CmdFactory();</span>
+  private ITodoHandler todoHandler;
+
+  public List&lt;String&gt; getCmdList() {
+<span class="nc" id="L28">    return this.cmdList;</span>
+  }
+
+  public List&lt;AbstractCmd&gt; getCmdObjList() {
+<span class="fc" id="L32">    return this.cmdObjList;</span>
+  }
+
+  public CmdFactory getCmdFactory() {
+<span class="nc" id="L36">    return this.cmdFactory;</span>
+  }
+
+  public ITodoHandler getTodoHandler() {
+<span class="fc" id="L40">    return this.todoHandler;</span>
+  }
+
+  /**
+   * Instantiates a new Args parser.
+   */
+<span class="fc" id="L46">  public Parser() {</span>
+<span class="fc" id="L47">  }</span>
+
+  /**
+   * Validates the arguments
+   *
+   * @param args The arguments
+   * @return The given arguments if they are valid
+   */
+  private boolean validateArgs(String[] args) {
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">    if (args.length &lt;= 1) {</span>
+<span class="nc" id="L57">      ErrorLogger.add(&quot;No arguments provided&quot;);</span>
+<span class="nc" id="L58">      return false;</span>
+    }
+<span class="fc" id="L60">    this.cmdList = Arrays.asList(args.clone());</span>
+<span class="fc" id="L61">    return true;</span>
+  }
+
+  /**
+   * Processes the arguments.
+   *
+   * @param args the arguments
+   */
+  public void processCmds(String[] args) {
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">    if (this.validateArgs(args)) {</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">      for (String userCmd : this.cmdList) {</span>
+<span class="fc" id="L72">        AbstractCmd cmd = this.cmdFactory.getCmd(userCmd);</span>
+<span class="fc bfc" id="L73" title="All 2 branches covered.">        if (cmd != null) {</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">          if (cmd.findArgument(this.cmdList)) {</span>
+<span class="fc" id="L75">            this.cmdObjList.add(cmd);</span>
+          }
+        }
+<span class="fc" id="L78">      }</span>
+    }
+<span class="pc bpc" id="L80" title="2 of 4 branches missed.">    if (this.cmdFactory.verifyCommands() &amp;&amp; ErrorLogger.isEmpty()) {</span>
+<span class="fc" id="L81">      this.sortList();</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">      for (AbstractCmd cmd : cmdObjList) {</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (cmd instanceof CSVFile) {</span>
+<span class="fc" id="L84">          this.todoHandler = new TodoHandler(cmd.getArgument());</span>
+        }
+<span class="fc" id="L86">      }</span>
+<span class="fc" id="L87">      todoHandler.takeAction(this.cmdObjList);</span>
+    } else {
+<span class="nc" id="L89">      ErrorLogger.printLog();</span>
+<span class="nc" id="L90">      System.out.println(new Usage());</span>
+<span class="nc" id="L91">      return;</span>
+    }
+<span class="fc" id="L93">  }</span>
+
+  @Override
+  public boolean equals(Object o) {
+<span class="nc bnc" id="L97" title="All 2 branches missed.">    if (this == o) {</span>
+<span class="nc" id="L98">      return true;</span>
+    }
+<span class="nc bnc" id="L100" title="All 4 branches missed.">    if (o == null || getClass() != o.getClass()) {</span>
+<span class="nc" id="L101">      return false;</span>
+    }
+<span class="nc" id="L103">    Parser parser = (Parser) o;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">    return getCmdList().equals(parser.getCmdList()) &amp;&amp; getCmdObjList()</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        .equals(parser.getCmdObjList())</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        &amp;&amp; getCmdFactory().equals(parser.getCmdFactory()) &amp;&amp; getTodoHandler()</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">        .equals(parser.getTodoHandler());</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="nc" id="L112">    return Objects.hash(getCmdList(), getCmdObjList(), getCmdFactory(), getTodoHandler());</span>
+  }
+
+  private void sortList() {
+<span class="fc" id="L116">    Collections.sort(cmdObjList, Comparator.comparing(AbstractCmd::getName));</span>
+<span class="fc" id="L117">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

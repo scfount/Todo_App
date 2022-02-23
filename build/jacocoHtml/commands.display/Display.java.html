@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Display.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HW9</a> &gt; <a href="index.source.html" class="el_package">commands.display</a> &gt; <span class="el_source">Display.java</span></div><h1>Display.java</h1><pre class="source lang-java linenums">package commands.display;
+
+import commands.AbstractCmd;
+import java.util.ArrayList;
+import java.util.List;
+import model.todo.Todo;
+import utilities.Constants;
+import utilities.ErrorLogger;
+
+/**
+ * The type Display todo.
+ */
+public class Display extends AbstractCmd implements IDisplay {
+
+<span class="fc" id="L15">  protected static DisplayFactory displayFactory = new DisplayFactory();</span>
+<span class="fc" id="L16">  protected List&lt;Display&gt; displayProperties = new ArrayList&lt;&gt;();</span>
+  protected boolean displayStatus;
+
+  /**
+   * Instantiates a new Display.
+   *
+   * @param name    the name
+   * @param command the command
+   */
+  public Display(String name, String command) {
+<span class="fc" id="L26">    super(name, command);</span>
+<span class="fc" id="L27">  }</span>
+
+  /**
+   * Gets display properties.
+   *
+   * @return a List of display objects
+   */
+  public List&lt;Display&gt; getDisplayProperties() {
+<span class="fc" id="L35">    return this.displayProperties;</span>
+  }
+
+  /**
+   * Find argument for specified command
+   *
+   * @param cmdList the cmd list
+   * @return True since this command has no argument
+   * @throws IndexOutOfBoundsException the index out of bounds exception
+   */
+  @Override
+  public boolean findArgument(List&lt;String&gt; cmdList) throws IndexOutOfBoundsException {
+<span class="fc bfc" id="L47" title="All 2 branches covered.">    for (String userCmd : cmdList) {</span>
+<span class="fc" id="L48">      Display cmd = displayFactory.getCmd(userCmd);</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">      if (cmd != null) {</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">        if (cmd.getName() == Constants.SHOW_CATEGORY_NAME) {</span>
+<span class="nc" id="L51">          cmd.findAddArgument(cmdList);</span>
+        }
+<span class="fc" id="L53">        cmd.displayStatus = true;</span>
+<span class="fc" id="L54">        this.displayProperties.add(cmd);</span>
+      }
+<span class="fc" id="L56">    }</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">    if (!displayFactory.verifyCommands()) {</span>
+<span class="nc" id="L58">      ErrorLogger.add(&quot;Only 1 sort method allowed&quot;);</span>
+    }
+<span class="fc" id="L60">    return true;</span>
+  }
+
+  /**
+   * Finds the argument for the display command if applicable
+   *
+   * @throws IndexOutOfBoundsException the index out of bounds exception
+   */
+  protected void findAddArgument(List&lt;String&gt; cmdList) throws IndexOutOfBoundsException {
+<span class="nc" id="L69">    return;</span>
+  }
+
+  /**
+   * Applies a specific filter or sort on a list of todos
+   *
+   * @param todoList the todo list
+   * @return the list with the display property applied
+   */
+  @Override
+  public List&lt;Todo&gt; applyDisplayProperty(List&lt;Todo&gt; todoList) {
+<span class="nc" id="L80">    return null;</span>
+  }
+
+  /**
+   * @return String representation of this object
+   */
+  @Override
+  public String toString() {
+<span class="nc" id="L88">    return &quot;Display{&quot; +</span>
+        &quot;displayProperties=&quot; + displayProperties +
+        '}';
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

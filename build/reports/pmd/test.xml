@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 http://pmd.sourceforge.net/report_2_0_0.xsd" version="6.26.0" timestamp="2022-01-25T11:52:33.600">
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/test/java/controller/todohandler/TodoHandlerTest.java">
+<violation beginline="52" endline="52" begincolumn="5" endcolumn="22" rule="SystemPrintln" ruleset="Best Practices" package="controller.todohandler" class="TodoHandlerTest" method="completeTodo" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_bestpractices.html#systemprintln" priority="2">
+System.out.println is used
+</violation>
+</file>
+<file name="/Users/stevenfountain/Documents/Northeastern/2021_01_Spring/CS5004/Group_Steven_Fountain_Bo_Mendez_Sruti_Munukutla/HW9/src/test/java/todo/TodoTest.java">
+<violation beginline="70" endline="70" begincolumn="17" endcolumn="36" rule="EqualsNull" ruleset="Error Prone" package="todo" class="TodoTest" method="testEquals" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_errorprone.html#equalsnull" priority="1">
+Avoid using equals() to compare against null
+</violation>
+<violation beginline="88" endline="88" begincolumn="17" endcolumn="34" rule="EqualsNull" ruleset="Error Prone" package="todo" class="TodoTest" method="testEqualsBuilder" externalInfoUrl="https://pmd.github.io/pmd-6.26.0/pmd_rules_java_errorprone.html#equalsnull" priority="1">
+Avoid using equals() to compare against null
+</violation>
+</file>
+</pmd>

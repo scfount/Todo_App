@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Priority.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HW9</a> &gt; <a href="index.source.html" class="el_package">commands.add</a> &gt; <span class="el_source">Priority.java</span></div><h1>Priority.java</h1><pre class="source lang-java linenums">package commands.add;
+
+import model.todo.Todo.Builder;
+import utilities.Constants;
+import utilities.ErrorLogger;
+
+/**
+ * The type Priority.
+ */
+public class Priority extends Add {
+<span class="fc" id="L11">  private final int highPriority = 1;</span>
+<span class="fc" id="L12">  private final int lowPriority = 3;</span>
+  protected int priority;
+
+  /**
+   * Instantiates a new Priority.
+   */
+  public Priority() {
+<span class="fc" id="L19">    super(Constants.PRIORITY_NAME, Constants.PRIORITY_CMD);</span>
+<span class="fc" id="L20">  }</span>
+
+  /**
+   * Checks to see if the found argument is valid
+   *
+   * @return True if the argument is a valid priority int, false if not
+   */
+  @Override
+  public boolean isValidArgument() {
+    try {
+<span class="fc" id="L30">      this.priority = Integer.parseInt(this.argument);</span>
+<span class="pc bpc" id="L31" title="2 of 4 branches missed.">      if (this.priority &gt;= highPriority &amp;&amp; this.priority &lt;= lowPriority)</span>
+<span class="fc" id="L32">      return true;</span>
+<span class="nc" id="L33">    } catch (NumberFormatException numberFormatException) {</span>
+<span class="nc" id="L34">      ErrorLogger.add(&quot;Please provide a valid Priority number of 1, 2, or 3&quot;);</span>
+<span class="nc" id="L35">    }</span>
+<span class="nc" id="L36">    return false;</span>
+  }
+
+  /**
+   * Uses Builder pattern to build a todo with the required argument
+   *
+   * @param todoBuilder the todo to build
+   * @return the builder with the required argument appended
+   */
+  @Override
+  protected Builder appendBuilder(Builder todoBuilder) {
+<span class="fc" id="L47">    todoBuilder.addPriority(this.priority);</span>
+<span class="fc" id="L48">    return todoBuilder;</span>
+  }
+
+  /**
+   * @return String representation of this object
+   */
+  @Override
+  public String toString() {
+<span class="nc" id="L56">    return &quot;Priority{&quot; +</span>
+        &quot;argument='&quot; + argument + '\'' +
+        '}';
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

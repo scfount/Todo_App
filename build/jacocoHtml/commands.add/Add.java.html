@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Add.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HW9</a> &gt; <a href="index.source.html" class="el_package">commands.add</a> &gt; <span class="el_source">Add.java</span></div><h1>Add.java</h1><pre class="source lang-java linenums">package commands.add;
+
+import commands.AbstractCmd;
+import java.util.List;
+import model.todo.Todo;
+import model.todo.Todo.Builder;
+import utilities.ErrorLogger;
+
+/**
+ * The type Add.
+ */
+public class Add extends AbstractCmd {
+
+<span class="fc" id="L14">  protected static AddFactory addFactory = new AddFactory();</span>
+  protected Todo newTodo;
+  protected Builder buildTodo;
+
+
+  /**
+   * Instantiates a new Add.
+   *
+   * @param name    the name
+   * @param command the command
+   */
+  public Add(String name, String command) {
+<span class="fc" id="L26">    super(name, command);</span>
+<span class="fc" id="L27">  }</span>
+
+  /**
+   * Gets new todo.
+   *
+   * @return the new todo
+   */
+  public Todo getNewTodo() {
+<span class="fc" id="L35">    return this.newTodo;</span>
+  }
+
+  /**
+   * Find argument for specified command
+   *
+   * @param cmdList the cmd list
+   * @return True if the argument for the command is found, otherwise false
+   * @throws IndexOutOfBoundsException the index out of bounds exception
+   */
+  @Override
+  public boolean findArgument(List&lt;String&gt; cmdList) throws IndexOutOfBoundsException {
+<span class="fc" id="L47">    boolean found = super.findArgument(cmdList);</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">    if (found) {</span>
+<span class="fc" id="L49">      this.buildTodo = appendBuilder(this.buildTodo);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">      for (String userCmd : cmdList) {</span>
+<span class="fc" id="L51">        Add cmd = addFactory.getCmd(userCmd);</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (cmd != null) {</span>
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">          if (cmd.findAddArgument(cmdList)) {</span>
+<span class="fc" id="L54">            cmd.appendBuilder(this.buildTodo);</span>
+          }
+        }
+<span class="fc" id="L57">      }</span>
+<span class="fc" id="L58">      this.newTodo = this.buildTodo.build();</span>
+    } else {
+<span class="nc" id="L60">      ErrorLogger.add(&quot;Please add text description for Todo&quot;);</span>
+    }
+<span class="fc" id="L62">    return found;</span>
+  }
+
+  /**
+   * Find the argument for commands that relate to adding a todo
+   *
+   * @return true if found, false otherwise
+   * @throws IndexOutOfBoundsException the index out of bounds exception
+   */
+  protected boolean findAddArgument(List&lt;String&gt; cmdList) throws IndexOutOfBoundsException {
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">    if (cmdList.contains(this.getCommand())) {</span>
+      try {
+<span class="fc" id="L74">        int argIndex = cmdList.indexOf(this.getCommand()) + 1;</span>
+<span class="fc" id="L75">        this.argument = cmdList.get(argIndex);</span>
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (this.isValidArgument()) {</span>
+<span class="fc" id="L77">          return true;</span>
+        } else {
+<span class="nc" id="L79">          ErrorLogger.add(this.getName() + &quot; argument not provided&quot;);</span>
+        }
+<span class="nc" id="L81">      } catch (IndexOutOfBoundsException indexOutOfBoundsException) {</span>
+<span class="nc" id="L82">        ErrorLogger.add(this.getName() + &quot; argument not provided&quot;);</span>
+<span class="nc" id="L83">      }</span>
+    }
+<span class="nc" id="L85">    return false;</span>
+  }
+
+  /**
+   * Uses Builder pattern to build a todo with the required argument
+   *
+   * @param todoBuilder the todo to build
+   * @return the builder with the required argument appended
+   */
+  protected Builder appendBuilder(Builder todoBuilder) {
+<span class="fc" id="L95">    todoBuilder = new Builder(this.getArgument());</span>
+<span class="fc" id="L96">    return todoBuilder;</span>
+  }
+
+//  @Override
+//  public boolean equals(Object o) {
+//    if (this == o) {
+//      return true;
+//    }
+//    if (o == null || getClass() != o.getClass()) {
+//      return false;
+//    }
+//    if (!super.equals(o)) {
+//      return false;
+//    }
+//    Add add = (Add) o;
+//    //2 added todos would never be same because of different ID's
+//    if (buildTodo == null) {
+//      if (add.buildTodo == null) {
+//        return true;
+//      } else {
+//        return false;
+//      }
+//    } else {
+//      return buildTodo.equals(add.buildTodo);
+//    }
+//  }
+//
+//  @Override
+//  public int hashCode() {
+//    return Objects.hash(super.hashCode(), buildTodo);
+//  }
+
+  /**
+   * @return String representation of an Add object
+   */
+  @Override
+  public String toString() {
+<span class="nc" id="L133">    return &quot;Add{&quot; +</span>
+        &quot;newTodo=&quot; + newTodo +
+        '}';
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

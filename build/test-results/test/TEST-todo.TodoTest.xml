@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="todo.TodoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-01-25T19:54:18" hostname="Stevens-MBP.local" time="0.061">
+  <properties/>
+  <testcase name="getText" classname="todo.TodoTest" time="0.061"/>
+  <system-out><![CDATA[*************************************************************************************
+ID   Text                                    Completed Due Date    Priority  Category  
+1    Finish HW9                              true      2020-03-22  1         school    
+6    Comb hair                               false     2021-12-15  1         null      
+7    Comb hair                               false     2021-12-15  1         null      
+8    Comb hair                               false     2021-12-15  1         null      
+9    Comb hair                               false     2021-12-15  1         null      
+11   Comb hair                               false     2021-12-15  1         null      
+12   Comb hair                               false     2021-12-15  1         null      
+13   Comb hair                               false     2021-12-15  1         null      
+14   Comb hair                               false     2021-12-15  1         null      
+15   Comb hair                               false     2021-12-15  1         null      
+17   Comb hair                               false     2021-12-15  1         null      
+18   Comb hair                               false     2021-12-15  1         null      
+19   Comb hair                               false     2021-12-15  1         null      
+20   Comb hair                               false     2021-12-15  1         null      
+21   Comb hair                               false     2021-12-15  1         null      
+23   Comb hair                               false     2021-12-15  1         null      
+24   This is the text description            false     2021-12-15  1         null      
+3    Study for finals                        false     null        2         school    
+2    Mail passport                           true      2020-02-28  3         null      
+4    Clean the house                         false     2020-03-22  3         home      
+5    Buy yarn for blanket, stuffed toy       true      null        3         home      
+10   Fix shed door                           false     null        3         null      
+16   Fix shed door                           false     null        3         null      
+22   Fix shed door                           false     null        3         null      
+*************************************************************************************
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

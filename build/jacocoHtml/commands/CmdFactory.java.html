@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CmdFactory.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HW9</a> &gt; <a href="index.source.html" class="el_package">commands</a> &gt; <span class="el_source">CmdFactory.java</span></div><h1>CmdFactory.java</h1><pre class="source lang-java linenums">package commands;
+
+import commands.add.Add;
+import commands.display.Display;
+import utilities.Constants;
+import utilities.ErrorLogger;
+
+
+/**
+ * The type Comm factory.
+ */
+public class CmdFactory {
+<span class="fc" id="L13">  private boolean add = false;</span>
+<span class="fc" id="L14">  private boolean complete = false;</span>
+<span class="fc" id="L15">  private boolean csv = false;</span>
+<span class="fc" id="L16">  private boolean display = false;</span>
+
+<span class="fc" id="L18">  public CmdFactory() {</span>
+<span class="fc" id="L19">  }</span>
+
+  /**
+   * Returns a specific Abstract Comm type based on the argument
+   *
+   * @param cmd the cmd String
+   * @return a specific type of Abstract Comm, or null
+   */
+  public AbstractCmd getCmd(String cmd) {
+<span class="pc bpc" id="L28" title="2 of 4 branches missed.">    if (cmd == null || cmd.isEmpty()) {</span>
+<span class="nc" id="L29">      return null;</span>
+    }
+<span class="fc bfc" id="L31" title="All 2 branches covered.">    if (cmd.equals(Constants.CSV_FILE_CMD)) {</span>
+<span class="fc" id="L32">      this.csv = true;</span>
+<span class="fc" id="L33">      return new CSVFile();</span>
+    }
+<span class="fc bfc" id="L35" title="All 2 branches covered.">    else if (cmd.equals(Constants.ADD_TODO_CMD)) {</span>
+<span class="fc" id="L36">      this.add = true;</span>
+<span class="fc" id="L37">      return new Add(Constants.ADD_TODO_NAME, Constants.TEXT_CMD);</span>
+    }
+<span class="pc bpc" id="L39" title="1 of 2 branches missed.">    else if (cmd.equals(Constants.COMPLETE_TODO_CMD)) {</span>
+<span class="nc" id="L40">      this.complete = true;</span>
+<span class="nc" id="L41">      return new Complete();</span>
+    }
+<span class="fc bfc" id="L43" title="All 2 branches covered.">    else if (cmd.equals(Constants.DISPLAY_CMD)) {</span>
+<span class="fc" id="L44">      this.display = true;</span>
+<span class="fc" id="L45">      return new Display(Constants.DISPLAY_NAME, Constants.DISPLAY_CMD);</span>
+    }
+<span class="fc" id="L47">    return null;</span>
+  }
+
+  /**
+   * Checks that the provided flags are adequate to run the program
+   *
+   * @return true if the commands are valid, false otherwise
+   */
+  public boolean verifyCommands() {
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">    if (this.csv) {</span>
+<span class="pc bpc" id="L57" title="5 of 6 branches missed.">      if (this.add || this.complete || this.display) {</span>
+<span class="fc" id="L58">        return true;</span>
+      } else {
+<span class="nc" id="L60">        ErrorLogger.add(&quot;Insufficient commands provided&quot;);</span>
+      }
+    } else {
+<span class="nc" id="L63">      ErrorLogger.add(&quot;Insufficient commands provided&quot;);</span>
+    }
+<span class="nc" id="L65">    return false;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
